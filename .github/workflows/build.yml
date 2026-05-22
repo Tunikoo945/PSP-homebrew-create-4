@@ -1,0 +1,40 @@
+name: PSP Homebrew Build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: pspdev/pspdev:latest
+
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v4
+
+      - name: PSP SDK Kontrol
+        run: |
+          psp-config --pspsdk-path
+          psp-gcc --version
+
+      - name: Build
+        run: |
+          make
+
+      - name: Upload EBOOT
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSP-EBOOT
+          path: |
+            EBOOT.PBP
+            *.elf
+            *.prx
