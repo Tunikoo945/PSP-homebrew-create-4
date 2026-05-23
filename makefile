@@ -9,6 +9,7 @@ LIBS = -lpspdebug -lpspdisplay -lpspctrl
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Space Escape
+PSP_EBOOT_ICON = ICON0.PNG
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
